@@ -7,16 +7,16 @@ function mathReplace(mathValue) {
     return mathValue
 }
 
-// function displayDraw(){
-//     console.log('отрисованно')
-// }
+    function displayDraw() {
+    console.log('отрисованно')
+    document.getElementById('display').textContent = startNumbersString
+}
 
 function checkButtonPress(button) {
     // console.log('нажата кнопка') кал для отладки
     const value = button.target.textContent
     console.log(value);
     if (value == '=') {
-        startNumbersString = mathReplace(startNumbers)
         console.log(`Итог вычисления ${eval(startNumbersString)}`)
     }
     else if (value == "+") {
@@ -51,9 +51,14 @@ function checkButtonPress(button) {
         startNumbers.push(value)
         // console.log(startNumbers) тестовая параша
     }
-    // displayDraw()
 
 }
-buttonPressCheck.forEach(button => {
+
+while (true) {
+    buttonPressCheck.forEach(button => {
     button.addEventListener("click", checkButtonPress)
+    displayDraw()
+    startNumbersString = mathReplace(startNumbers)
 })
+
+}
