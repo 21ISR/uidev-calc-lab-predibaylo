@@ -2,7 +2,7 @@ const buttonPressCheck = document.querySelectorAll("button")
 let startNumbers = []
 startNumbersString = ""
 function mathReplace(mathValue) {
-    mathValue = ((mathValue.join()).replaceAll(",", ""))
+    mathValue = mathValue.join("")
     console.log(`Выражение ${mathValue}`)
     return mathValue
 }
@@ -16,15 +16,15 @@ function checkButtonPress(button) {
     const value = button.target.textContent
     console.log(value);
     if (value == '=') {
-        startNumbers = mathReplace(startNumbers)
-        console.log(`Итог вычисления ${eval(startNumbers)}`)
+        startNumbersString = mathReplace(startNumbers)
+        console.log(`Итог вычисления ${eval(startNumbersString)}`)
     }
     else if (value == "+") {
         startNumbers.push(value)
 
     }
-    else if (value == "-") {
-        startNumbers.push(value)
+    else if (value == "−") {
+        startNumbers.push("-")
 
     }
     else if (value == ".") {
@@ -34,10 +34,11 @@ function checkButtonPress(button) {
 
     }
     else if (value == "AC") {
-
+        startNumbers = []
     }
     else if (value == "+/-") {
-
+        startNumbersString = (`-${mathReplace(startNumbers)}`)
+        console.log(`Итог вычисления ${eval(startNumbersString)}`)
     }
     else if (value == "÷") {
         startNumbers.push("/")
