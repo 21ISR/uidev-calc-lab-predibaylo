@@ -1,29 +1,34 @@
 const buttonPressCheck = document.querySelectorAll("button")
 let startNumbers = []
-
+startNumbersString = ""
 function mathReplace(mathValue) {
-    mathValue = mathValue
-
-
-    return eval()
+    mathValue = ((mathValue.join()).replaceAll(",", ""))
+    console.log(`Выражение ${mathValue}`)
+    return mathValue
 }
+
+// function displayDraw(){
+//     console.log('отрисованно')
+// }
 
 function checkButtonPress(button) {
     // console.log('нажата кнопка') кал для отладки
     const value = button.target.textContent
     console.log(value);
     if (value == '=') {
-        console.log('function =')
-
-    } 
+        startNumbers = mathReplace(startNumbers)
+        console.log(`Итог вычисления ${eval(startNumbers)}`)
+    }
     else if (value == "+") {
-        
+        startNumbers.push(value)
+
     }
     else if (value == "-") {
+        startNumbers.push(value)
 
     }
     else if (value == ".") {
-
+        startNumbers.push(value)
     }
     else if (value == "%") {
 
@@ -35,44 +40,19 @@ function checkButtonPress(button) {
 
     }
     else if (value == "÷") {
+        startNumbers.push("/")
 
     }
     else if (value == "×") {
+        startNumbers.push("*")
+    }
+    else if ((value) == "1" || (value) == "2" || (value) == "3" || (value) == "4" || (value) == "5" || (value) == "6" || (value) == "7" || (value) == "8" || (value) == "9" || (value) == "0") {
+        startNumbers.push(value)
+        // console.log(startNumbers) тестовая параша
+    }
+    // displayDraw()
 
-    }
-    else if (value == "1") {
-        startNumbers.push(1)
-    }
-    else if (value == "2") {
-        startNumbers.push(2)
-    }
-    else if (value == "3") {
-        startNumbers.push(3)
-    }
-    else if (value == "4") {
-        startNumbers.push(4)
-    }
-    else if (value == "5") {
-        startNumbers.push(5)
-    }
-    else if (value == "6") {
-        startNumbers.push(6)
-    }
-    else if (value == "7") {
-        startNumbers.push(7)
-    }
-    else if (value == "8") {
-        startNumbers.push(8)
-    }
-    else if (value == "9") {
-        startNumbers.push(9)
-    }
-    else if (value == "0") {
-    startNumbers.push()
-    }
 }
-
-
 buttonPressCheck.forEach(button => {
     button.addEventListener("click", checkButtonPress)
 })
