@@ -5,6 +5,14 @@ function mathReplace(mathValue) {
     mathValue = mathValue.join("")
     return mathValue
 }
+function mathPercent(mathValue) {
+    mathValue = mathValue.split("%")
+    mathValue = (mathValue[0] / 100) * mathValue[1]
+    return mathValue // я 
+                    // приколист
+
+
+}
 
 function displayDraw() {
     // console.log('отрисованно')
@@ -21,6 +29,7 @@ function checkButtonPress(button) {
         startNumbersString = eval(mathReplace(startNumbers))
         startNumbers = [startNumbersString]
         displayDraw()
+        
 
     }
     else if (value == "+") {
@@ -35,6 +44,11 @@ function checkButtonPress(button) {
         startNumbers.push(value)
     }
     else if (value == "%") {
+        startNumbers.push(value)
+        startNumbers = mathReplace(startNumbers)
+        startNumbers = mathPercent(startNumbers)
+        startNumbers = [startNumbersString]
+        displayDraw()
 
     }
     else if (value == "AC") {
@@ -42,8 +56,10 @@ function checkButtonPress(button) {
          document.getElementById('display').textContent = "0"
     }
     else if (value == "+/-") {
-        startNumbersString = (`-${mathReplace(startNumbers)}`)
-        console.log(`Итог вычисления ${eval(startNumbersString)}`)
+        startNumbersString = eval(`-${mathReplace(startNumbers)}`)
+        startNumbers = [startNumbersString]
+        displayDraw()
+
     }
     else if (value == "÷") {
         startNumbers.push("/")
@@ -63,9 +79,6 @@ function checkButtonPress(button) {
 }
 
 
-// while (true) {
     buttonPressCheck.forEach(button => {
     button.addEventListener("click", checkButtonPress)
-// })
-
 })
