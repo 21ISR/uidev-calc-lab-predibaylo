@@ -3,13 +3,13 @@ let startNumbers = []
 startNumbersString = ""
 function mathReplace(mathValue) {
     mathValue = mathValue.join("")
-    console.log(`Выражение ${mathValue}`)
     return mathValue
 }
 
-    function displayDraw() {
-    console.log('отрисованно')
+function displayDraw() {
+    // console.log('отрисованно')
     document.getElementById('display').textContent = startNumbersString
+
 }
 
 function checkButtonPress(button) {
@@ -18,6 +18,10 @@ function checkButtonPress(button) {
     console.log(value);
     if (value == '=') {
         console.log(`Итог вычисления ${eval(startNumbersString)}`)
+        startNumbersString = eval(mathReplace(startNumbers))
+        startNumbers = [startNumbersString]
+        displayDraw()
+
     }
     else if (value == "+") {
         startNumbers.push(value)
@@ -35,6 +39,7 @@ function checkButtonPress(button) {
     }
     else if (value == "AC") {
         startNumbers = []
+         document.getElementById('display').textContent = "0"
     }
     else if (value == "+/-") {
         startNumbersString = (`-${mathReplace(startNumbers)}`)
@@ -51,14 +56,16 @@ function checkButtonPress(button) {
         startNumbers.push(value)
         // console.log(startNumbers) тестовая параша
     }
-
+    if (value != "=") {
+        startNumbersString = mathReplace(startNumbers)
+        displayDraw()
+    }
 }
 
-while (true) {
+
+// while (true) {
     buttonPressCheck.forEach(button => {
     button.addEventListener("click", checkButtonPress)
-    displayDraw()
-    startNumbersString = mathReplace(startNumbers)
-})
+// })
 
-}
+})
