@@ -1,4 +1,5 @@
 const buttonPressCheck = document.querySelectorAll("button")
+let percentValue = 0
 let startNumbers = []
 startNumbersString = ""
 function mathReplace(mathValue) {
@@ -7,7 +8,9 @@ function mathReplace(mathValue) {
 }
 function mathPercent(mathValue) {
     mathValue = mathValue.split("%")
-    mathValue = (mathValue[0] / 100) * mathValue[1]
+    mathValue = ((mathValue[0] / 100) * mathValue[1])
+    console.log(mathValue);
+    
     return mathValue // я 
                     // приколист
 
@@ -25,9 +28,17 @@ function checkButtonPress(button) {
     const value = button.target.textContent
     console.log(value);
     if (value == '=') {
-        console.log(`Итог вычисления ${eval(startNumbersString)}`)
+        
+        if (percentValue == 1) {
+            startNumbersString = mathPercent(startNumbersString)
+            console.log(`startNumbersString = ${startNumbersString}`)
+            percentValue = 0
+        }
+        else {
         startNumbersString = eval(mathReplace(startNumbers))
-        startNumbers = [startNumbersString]
+    }
+        startNumbers = [startNumbersString] 
+        console.log(`Итог вычисления ${eval(startNumbersString)}`)
         displayDraw()
         
 
@@ -45,9 +56,11 @@ function checkButtonPress(button) {
     }
     else if (value == "%") {
         startNumbers.push(value)
-        startNumbers = mathReplace(startNumbers)
-        startNumbers = mathPercent(startNumbers)
-        startNumbers = [startNumbersString]
+        // startNumbers = mathReplace(startNumbers)
+        // startNumbers = mathPercent(startNumbers)
+        // startNumbers = [startNumbersString]
+        percentValue = 1
+        
         displayDraw()
 
     }
